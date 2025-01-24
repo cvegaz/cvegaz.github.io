@@ -1,6 +1,3 @@
-# FILE: /portfolio/portfolio/README.md
-# This file contains documentation for the portfolio project.
-
 # Portfolio Project
 
 This is a personal portfolio project showcasing my work and skills. The project is structured to provide a clean and organized presentation of my projects, with a focus on maintainability and ease of use.
