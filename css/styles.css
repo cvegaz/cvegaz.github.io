@@ -1,0 +1,105 @@
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+}
+
+.image-container img {
+    opacity: 0.5;
+    width: 200px;
+    height: 200px;
+}
+
+.image-container a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+}
+		
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+.image-container {
+    margin: 20px;
+    overflow: hidden;
+    position: relative;
+}
+.image-container img {
+    width: 300px;
+    height: 200px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+.image-container:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.8);
+}
+.image-container a {
+    position: absolute;
+    /*bottom: 65px;*/
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.image-container a:hover { /*del fondo de Ex de cada imagen*/
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.image-container:hover .hover-text {
+    display: block;
+}
+.hover-text {
+    display: none;
+    margin-top: 5px;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.header {
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0; /* Mismo color de fondo que el resto de la página */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.container {
+    margin-top: 50px; /* Ajusta el margen superior para evitar que el contenido se superponga con el encabezado */
+}
