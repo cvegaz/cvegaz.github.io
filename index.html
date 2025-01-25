@@ -63,3 +63,9 @@
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.send('visitCount=' + visitCount);
 </script>
+<div style="position: fixed; bottom: 10px; right: 10px; color: lightgray; font-size: 12px;">
+	<span id="visitCountDisplay"></span>
+</div>
+<script>
+	document.getElementById('visitCountDisplay').textContent = localStorage.getItem('visitCount');
+</script>
