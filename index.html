@@ -29,6 +29,11 @@
 			<div class="hover-text"></div>
 		</div>
 	</div>
+	<div class="contact">
+		<h2 style="font-size: 16px; color: #333;">Contact me</h2>
+		<p style="font-size: 14px; color: #808080;">vezc.vega@gmail.com</p>
+		<p style="font-size: 14px; color: #808080;">CDMX</p>
+	</div>
 	<script>
 		document.querySelectorAll('.image-container').forEach(container => {
 			container.addEventListener('mouseover', () => {
@@ -39,6 +44,14 @@
 				container.querySelector('.hover-text').textContent = '';
 			});
 		});
+
+		// Contador de visitas
+		if (localStorage.getItem('visitCount')) {
+			let visitCount = parseInt(localStorage.getItem('visitCount'));
+			localStorage.setItem('visitCount', visitCount + 1);
+		} else {
+			localStorage.setItem('visitCount', 1);
+		}
 	</script>
 </body>
 </html>
