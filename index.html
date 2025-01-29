@@ -13,19 +13,16 @@
 		<p style="font-size: 14px; color: #808080; margin-left: 20px; margin-right: 60px;">Experienced Data Engineer with expertise in Python, SQL, and Cloud platforms. Proven track record in developing scalable data solutions, process optimization, and creating innovative analytics dashboards using Power BI. Passionate about leveraging technology to solve business challenges and drive strategic decisions.</p>
 	</div>
 	<div class="container">
-		<div class="image-container" data-hover-text="Dashboard">
+		<div class="image-container" data-hover-text="Manufacturing" data-url="https://github.com/cvegaz/portfolio/blob/main/power_bi/README.md">
 			<img src="assets/images/imgBI.png" alt="Image 1">
-			<a href="https://github.com/cvegaz/portfolio/blob/main/power_bi/README.md" target="_blank">Ex</a>
 			<div class="hover-text"></div>
 		</div>
-		<div class="image-container" data-hover-text="Python">
+		<div class="image-container" data-hover-text="Python" data-url="https://github.com/cvegaz/portfolio/blob/main/python_data_entry/README.md">
 			<img src="assets/images/imgPy.png" alt="Image 2">
-			<a href="https://github.com/cvegaz/portfolio/blob/main/python_data_entry/README.md" target="_blank">Ex</a>
 			<div class="hover-text"></div>
 		</div>
-		<div class="image-container" data-hover-text="DataBase">
+		<div class="image-container" data-hover-text="DataBase" data-url="https://github.com/cvegaz/portfolio/blob/main/sql_db/README.md">
 			<img src="assets/images/imgSQL.png" alt="Image 3">
-			<a href="https://github.com/cvegaz/portfolio/blob/main/sql_db/README.md" target="_blank">Ex</a>
 			<div class="hover-text"></div>
 		</div>
 	</div>
@@ -43,6 +40,10 @@
 			container.addEventListener('mouseout', () => {
 				container.querySelector('.hover-text').textContent = '';
 			});
+			container.addEventListener('click', () => {
+				const url = container.getAttribute('data-url');
+				window.open(url, '_blank');
+			});
 		});
 
 		// Contador de visitas
@@ -53,19 +54,11 @@
 			localStorage.setItem('visitCount', 1);
 		}
 	</script>
+	<div style="position: fixed; bottom: 10px; right: 10px; color: lightgray; font-size: 12px;">
+		<span id="visitCountDisplay"></span>
+	</div>
+	<script>
+		document.getElementById('visitCountDisplay').textContent = localStorage.getItem('visitCount');
+	</script>
 </body>
 </html>
-<script>
-	// Save visit count to a file
-	const visitCount = localStorage.getItem('visitCount');
-	const xhr = new XMLHttpRequest();
-	xhr.open('POST', 'save_visit_count.php', true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.send('visitCount=' + visitCount);
-</script>
-<div style="position: fixed; bottom: 10px; right: 10px; color: lightgray; font-size: 12px;">
-	<span id="visitCountDisplay"></span>
-</div>
-<script>
-	document.getElementById('visitCountDisplay').textContent = localStorage.getItem('visitCount');
-</script>
