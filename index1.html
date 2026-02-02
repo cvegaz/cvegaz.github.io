@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Carlos Vega - Data Engineer | Python Developer</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+			color: #333;
+			line-height: 1.6;
+		}
+
+		/* Navbar */
+		nav {
+			background: rgba(39, 39, 78, 0.95);
+			padding: 1rem 0;
+			position: sticky;
+			top: 0;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			z-index: 100;
+		}
+
+		nav .container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 0 2rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		nav h1 {
+			font-size: 24px;
+			color: #fff;
+			font-weight: 700;
+		}
+
+		nav ul {
+			list-style: none;
+			display: flex;
+			gap: 2rem;
+		}
+
+		nav a {
+			color: #fff;
+			text-decoration: none;
+			font-size: 14px;
+			transition: color 0.3s;
+		}
+
+		nav a:hover {
+			color: #64b5f6;
+		}
+
+		/* Hero Section */
+		.hero {
+			background: linear-gradient(135deg, #27274e 0%, #38ada9 100%);
+			color: white;
+			padding: 6rem 2rem;
+			text-align: center;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+		}
+
+		.hero h1 {
+			font-size: 48px;
+			margin-bottom: 1rem;
+			font-weight: 700;
+		}
+
+		.hero .subtitle {
+			font-size: 24px;
+			margin-bottom: 1.5rem;
+			color: #e0f2f1;
+		}
+
+		.hero p {
+			font-size: 16px;
+			max-width: 700px;
+			margin: 0 auto 2rem;
+			color: #c0c8d1;
+			line-height: 1.8;
+		}
+
+		.cta-button {
+			display: inline-block;
+			background: #64b5f6;
+			color: white;
+			padding: 12px 30px;
+			border-radius: 5px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.3s;
+			margin: 0 10px;
+		}
+
+		.cta-button:hover {
+			background: #fff;
+			color: #27274e;
+			transform: translateY(-2px);
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+		}
+
+		.cta-button.secondary {
+			background: transparent;
+			border: 2px solid #64b5f6;
+		}
+
+		.cta-button.secondary:hover {
+			background: #64b5f6;
+			color: white;
+		}
+
+		/* Container */
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 4rem 2rem;
+		}
+
+		/* Section Title */
+		.section-title {
+			text-align: center;
+			font-size: 36px;
+			color: #27274e;
+			margin-bottom: 3rem;
+			font-weight: 700;
+			position: relative;
+			padding-bottom: 15px;
+		}
+
+		.section-title::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 60px;
+			height: 4px;
+			background: linear-gradient(90deg, #38ada9, #64b5f6);
+			border-radius: 2px;
+		}
+
+		/* Skills Section */
+		.skills-section {
+			background: white;
+			padding: 3rem;
+			border-radius: 10px;
+			box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+			margin-bottom: 4rem;
+		}
+
+		.skills-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 2rem;
+			margin-top: 2rem;
+		}
+
+		.skill-card {
+			background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+			padding: 1.5rem;
+			border-radius: 8px;
+			text-align: center;
+			transition: all 0.3s;
+		}
+
+		.skill-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+		}
+
+		.skill-card i {
+			font-size: 32px;
+			color: #38ada9;
+			margin-bottom: 1rem;
+		}
+
+		.skill-card h3 {
+			color: #27274e;
+			font-size: 18px;
+			margin-bottom: 0.5rem;
+		}
+
+		.skill-card p {
+			color: #666;
+			font-size: 14px;
+		}
+
+		/* Projects Grid */
+		.projects-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+			gap: 2.5rem;
+			margin-bottom: 4rem;
+		}
+
+		/* Project Card */
+		.project-card {
+			background: white;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+			transition: all 0.3s;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.project-card:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+		}
+
+		.project-image {
+			width: 100%;
+			height: 250px;
+			background: linear-gradient(135deg, #38ada9 0%, #64b5f6 100%);
+			overflow: hidden;
+			position: relative;
+		}
+
+		.project-image img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 0.3s;
+		}
+
+		.project-card:hover .project-image img {
+			transform: scale(1.05);
+		}
+
+		.project-content {
+			padding: 2rem;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.project-category {
+			display: inline-block;
+			background: #e8f5e9;
+			color: #38ada9;
+			padding: 0.4rem 0.8rem;
+			border-radius: 20px;
+			font-size: 12px;
+			font-weight: 600;
+			margin-bottom: 1rem;
+			width: fit-content;
+		}
+
+		.project-title {
+			font-size: 22px;
+			color: #27274e;
+			margin-bottom: 0.8rem;
+			font-weight: 700;
+		}
+
+		.project-description {
+			color: #666;
+			font-size: 14px;
+			margin-bottom: 1rem;
+			flex-grow: 1;
+		}
+
+		.tech-stack {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.tech-tag {
+			background: #f0f0f0;
+			color: #27274e;
+			padding: 0.4rem 0.8rem;
+			border-radius: 4px;
+			font-size: 12px;
+			font-weight: 600;
+		}
+
+		.project-actions {
+			display: flex;
+			gap: 1rem;
+		}
+
+		.btn {
+			flex: 1;
+			padding: 10px 15px;
+			border: none;
+			border-radius: 5px;
+			font-size: 13px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s;
+			text-decoration: none;
+			text-align: center;
+			display: inline-block;
+		}
+
+		.btn-primary {
+			background: linear-gradient(135deg, #38ada9 0%, #64b5f6 100%);
+			color: white;
+		}
+
+		.btn-primary:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(56, 173, 169, 0.4);
+		}
+
+		.btn-secondary {
+			background: white;
+			color: #27274e;
+			border: 2px solid #27274e;
+		}
+
+		.btn-secondary:hover {
+			background: #27274e;
+			color: white;
+		}
+
+		/* Contact Section */
+		.contact-section {
+			background: linear-gradient(135deg, #27274e 0%, #38ada9 100%);
+			color: white;
+			padding: 4rem 2rem;
+			text-align: center;
+			border-radius: 10px;
+			margin-bottom: 4rem;
+		}
+
+		.contact-section h2 {
+			font-size: 32px;
+			margin-bottom: 1.5rem;
+			font-weight: 700;
+		}
+
+		.contact-section p {
+			font-size: 16px;
+			margin-bottom: 2rem;
+			color: #e0f2f1;
+		}
+
+		.social-links {
+			display: flex;
+			justify-content: center;
+			gap: 2rem;
+			margin-bottom: 2rem;
+		}
+
+		.social-links a {
+			width: 50px;
+			height: 50px;
+			background: rgba(255, 255, 255, 0.2);
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-size: 20px;
+			transition: all 0.3s;
+			text-decoration: none;
+		}
+
+		.social-links a:hover {
+			background: #64b5f6;
+			transform: translateY(-5px);
+		}
+
+		.contact-info {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 2rem;
+			margin-top: 2rem;
+		}
+
+		.contact-info-item {
+			background: rgba(255, 255, 255, 0.1);
+			padding: 1.5rem;
+			border-radius: 8px;
+		}
+
+		.contact-info-item i {
+			font-size: 28px;
+			margin-bottom: 0.5rem;
+		}
+
+		.contact-info-item h3 {
+			font-size: 14px;
+			margin-bottom: 0.5rem;
+			font-weight: 600;
+		}
+
+		.contact-info-item p {
+			font-size: 14px;
+			color: #c0c8d1;
+		}
+
+		/* Footer */
+		footer {
+			background: #27274e;
+			color: #999;
+			text-align: center;
+			padding: 2rem;
+			font-size: 14px;
+		}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			nav ul {
+				gap: 1rem;
+			}
+
+			.hero h1 {
+				font-size: 32px;
+			}
+
+			.hero .subtitle {
+				font-size: 18px;
+			}
+
+			.projects-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.section-title {
+				font-size: 28px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<!-- Navbar -->
+	<nav>
+		<div class="container">
+			<h1>Carlos Vega</h1>
+			<ul>
+				<li><a href="#home">Inicio</a></li>
+				<li><a href="#projects">Proyectos</a></li>
+				<li><a href="#contact">Contacto</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- Hero Section -->
+	<section class="hero" id="home">
+		<h1>Data Engineer & Python Developer</h1>
+		<p class="subtitle">Transformando datos en soluciones inteligentes</p>
+		<p>Especializado en ingeniería de datos, Python y plataformas cloud. Experto en desarrollar soluciones escalables, optimizar procesos y crear dashboards analíticos con Power BI. Comprometido con usar tecnología para resolver desafíos empresariales.</p>
+		<a href="#projects" class="cta-button">Ver Proyectos</a>
+		<a href="#contact" class="cta-button secondary">Contáctame</a>
+	</section>
+
+	<!-- Skills Section -->
+	<div class="container">
+		<section class="skills-section">
+			<h2 class="section-title">Habilidades</h2>
+			<div class="skills-grid">
+				<div class="skill-card">
+					<i class="fas fa-database"></i>
+					<h3>Data Engineering</h3>
+					<p>Pipelines ETL, bases de datos, arquitectura de datos</p>
+				</div>
+				<div class="skill-card">
+					<i class="fab fa-python"></i>
+					<h3>Python</h3>
+					<p>Pandas, NumPy, automatización, análisis de datos</p>
+				</div>
+				<div class="skill-card">
+					<i class="fas fa-server"></i>
+					<h3>SQL & Bases de Datos</h3>
+					<p>Queries complejas, optimización, diseño de esquemas</p>
+				</div>
+				<div class="skill-card">
+					<i class="fas fa-chart-line"></i>
+					<h3>Power BI</h3>
+					<p>Dashboards, reportes, visualización de datos</p>
+				</div>
+				<div class="skill-card">
+					<i class="fas fa-cloud"></i>
+					<h3>Cloud Platforms</h3>
+					<p>AWS, Google Cloud, Azure</p>
+				</div>
+				<div class="skill-card">
+					<i class="fas fa-cogs"></i>
+					<h3>Optimización</h3>
+					<p>Mejora de procesos, automatización, eficiencia</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Projects Section -->
+		<section id="projects">
+			<h2 class="section-title">Proyectos Destacados</h2>
+			<div class="projects-grid">
+				<!-- Project 1: Power BI Manufacturing -->
+				<div class="project-card">
+					<div class="project-image">
+						<img src="assets/images/imgBI.png" alt="Manufacturing Dashboard">
+					</div>
+					<div class="project-content">
+						<span class="project-category">BUSINESS INTELLIGENCE</span>
+						<h3 class="project-title">Manufacturing Dashboard</h3>
+						<p class="project-description">Dashboard interactivo de Power BI para monitoreo en tiempo real de métricas de producción, análisis de eficiencia operacional y KPIs clave de manufactura.</p>
+						<div class="tech-stack">
+							<span class="tech-tag">Power BI</span>
+							<span class="tech-tag">SQL Server</span>
+							<span class="tech-tag">DAX</span>
+						</div>
+						<div class="project-actions">
+							<a href="https://github.com/cvegaz/portfolio/blob/main/power_bi/README.md" class="btn btn-primary" target="_blank">Ver Detalles</a>
+							<a href="https://github.com/cvegaz/portfolio" class="btn btn-secondary" target="_blank">GitHub</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Project 2: Python Data Entry -->
+				<div class="project-card">
+					<div class="project-image">
+						<img src="assets/images/imgPy.png" alt="Python Automation">
+					</div>
+					<div class="project-content">
+						<span class="project-category">AUTOMATIZACIÓN</span>
+						<h3 class="project-title">Python Data Entry Automation</h3>
+						<p class="project-description">Sistema de automatización desarrollado en Python para procesamiento, validación y entrada de datos. Reduce tiempo de procesamiento manual en 80%.</p>
+						<div class="tech-stack">
+							<span class="tech-tag">Python</span>
+							<span class="tech-tag">Pandas</span>
+							<span class="tech-tag">Openpyxl</span>
+						</div>
+						<div class="project-actions">
+							<a href="https://github.com/cvegaz/portfolio/blob/main/python_data_entry/README.md" class="btn btn-primary" target="_blank">Ver Detalles</a>
+							<a href="https://github.com/cvegaz/portfolio" class="btn btn-secondary" target="_blank">GitHub</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Project 3: SQL Database -->
+				<div class="project-card">
+					<div class="project-image">
+						<img src="assets/images/imgSQL.png" alt="Database Design">
+					</div>
+					<div class="project-content">
+						<span class="project-category">BASE DE DATOS</span>
+						<h3 class="project-title">Database Architecture & Design</h3>
+						<p class="project-description">Diseño e implementación de arquitectura de bases de datos relacionales optimizada para consultas complejas y alto rendimiento.</p>
+						<div class="tech-stack">
+							<span class="tech-tag">SQL</span>
+							<span class="tech-tag">Relational DB</span>
+							<span class="tech-tag">Stored Procedures</span>
+						</div>
+						<div class="project-actions">
+							<a href="https://github.com/cvegaz/portfolio/blob/main/sql_db/README.md" class="btn btn-primary" target="_blank">Ver Detalles</a>
+							<a href="https://github.com/cvegaz/portfolio" class="btn btn-secondary" target="_blank">GitHub</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<!-- Contact Section -->
+	<div class="container">
+		<section class="contact-section" id="contact">
+			<h2>Conecta Conmigo</h2>
+			<p>Estoy abierto a nuevas oportunidades y colaboraciones</p>
+			<div class="social-links">
+				<a href="https://github.com/cvegaz" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+				<a href="https://linkedin.com/in/cvegaz" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+				<a href="mailto:vezc.vega@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+			</div>
+			<div class="contact-info">
+				<div class="contact-info-item">
+					<i class="fas fa-envelope"></i>
+					<h3>Email</h3>
+					<p><a href="mailto:vezc.vega@gmail.com" style="color: inherit; text-decoration: none;">vezc.vega@gmail.com</a></p>
+				</div>
+				<div class="contact-info-item">
+					<i class="fas fa-map-marker-alt"></i>
+					<h3>Ubicación</h3>
+					<p>Ciudad de México, CDMX</p>
+				</div>
+				<div class="contact-info-item">
+					<i class="fas fa-briefcase"></i>
+					<h3>Disponibilidad</h3>
+					<p>Abierto a proyectos y colaboraciones</p>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<!-- Footer -->
+	<footer>
+		<p>&copy; 2024 Carlos Vega. Todos los derechos reservados. | Data Engineer & Python Developer</p>
+	</footer>
+
+	<script>
+		// Smooth scrolling
+		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+			anchor.addEventListener('click', function (e) {
+				e.preventDefault();
+				const target = document.querySelector(this.getAttribute('href'));
+				if (target) {
+					target.scrollIntoView({ behavior: 'smooth' });
+				}
+			});
+		});
+
+		// Contador de visitas
+		if (localStorage.getItem('visitCount')) {
+			let visitCount = parseInt(localStorage.getItem('visitCount'));
+			localStorage.setItem('visitCount', visitCount + 1);
+		} else {
+			localStorage.setItem('visitCount', 1);
+		}
+	</script>
+</body>
+</html>

@@ -1,64 +1,588 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Portfolio - Carlos Vega</title>
-	<link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Vega - Data Engineer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 100px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 25px;
+            position: relative;
+        }
+
+        .project-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .project-description {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 12px;
+        }
+
+        .project-link::after {
+            content: '→';
+            font-size: 1.2rem;
+        }
+
+        /* Project Impact Badges */
+        .impact-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .impact-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .impact-badge::before {
+            content: '✓';
+            font-weight: bold;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            background: var(--white);
+            padding: 60px 20px;
+            margin: 60px 0;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: var(--gradient);
+            color: var(--white);
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--dark-bg);
+            color: var(--white);
+            margin-top: 60px;
+        }
+
+        .contact-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 30px 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item::before {
+            content: '📧';
+            font-size: 1.3rem;
+        }
+
+        .contact-item.location::before {
+            content: '📍';
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .social-link:hover {
+            background: var(--white);
+            color: var(--dark-bg);
+            transform: translateY(-5px);
+            border-color: var(--white);
+        }
+
+        /* Visit Counter */
+        .visit-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--white);
+            color: var(--text-dark);
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1000;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+
+            .visit-counter {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-	<div class="header">
-		<h1 style="font-size: 22px; color: #27274e;">Carlos Vega</h1>
-		<h2 style="font-size: 18px; color: #333;">Data Engineer | Python Developer</h2>
-		<p style="font-size: 14px; color: #808080; margin-left: 20px; margin-right: 60px;">Experienced Data Engineer with expertise in Python, SQL, and Cloud platforms. Proven track record in developing scalable data solutions, process optimization, and creating innovative analytics dashboards using Power BI. Passionate about leveraging technology to solve business challenges and drive strategic decisions.</p>
-	</div>
-	<div class="container">
-		<div class="image-container" data-hover-text="Manufacturing" data-url="https://github.com/cvegaz/portfolio/blob/main/power_bi/README.md">
-			<img src="assets/images/imgBI.png" alt="Image 1">
-			<div class="hover-text"></div>
-		</div>
-		<div class="image-container" data-hover-text="Python" data-url="https://github.com/cvegaz/portfolio/blob/main/python_data_entry/README.md">
-			<img src="assets/images/imgPy.png" alt="Image 2">
-			<div class="hover-text"></div>
-		</div>
-		<div class="image-container" data-hover-text="DataBase" data-url="https://github.com/cvegaz/portfolio/blob/main/sql_db/README.md">
-			<img src="assets/images/imgSQL.png" alt="Image 3">
-			<div class="hover-text"></div>
-		</div>
-	</div>
-	<div class="contact">
-		<h2 style="font-size: 16px; color: #333;">Contact me</h2>
-		<p style="font-size: 14px; color: #808080;">vezc.vega@gmail.com</p>
-		<p style="font-size: 14px; color: #808080;">CDMX</p>
-	</div>
-	<script>
-		document.querySelectorAll('.image-container').forEach(container => {
-			container.addEventListener('mouseover', () => {
-				const hoverText = container.getAttribute('data-hover-text');
-				container.querySelector('.hover-text').textContent = hoverText;
-			});
-			container.addEventListener('mouseout', () => {
-				container.querySelector('.hover-text').textContent = '';
-			});
-			container.addEventListener('click', () => {
-				const url = container.getAttribute('data-url');
-				window.open(url, '_blank');
-			});
-		});
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Carlos Vega</h1>
+            <h2>Data Engineer | Python Developer</h2>
+            <p>Experienced Data Engineer with expertise in Python, SQL, and Cloud platforms. Proven track record in developing scalable data solutions, process optimization, and creating innovative analytics dashboards using Power BI. Passionate about leveraging technology to solve business challenges and drive strategic decisions.</p>
+            <div class="hero-tags">
+                <span class="tag">Python</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">Power BI</span>
+                <span class="tag">Excel</span>
+                <span class="tag">Web Automation</span>
+                <span class="tag">Data Analytics</span>
+            </div>
+        </div>
+    </section>
 
-		// Contador de visitas
-		if (localStorage.getItem('visitCount')) {
-			let visitCount = parseInt(localStorage.getItem('visitCount'));
-			localStorage.setItem('visitCount', visitCount + 1);
-		} else {
-			localStorage.setItem('visitCount', 1);
-		}
-	</script>
-	<div style="position: fixed; bottom: 10px; right: 10px; color: lightgray; font-size: 12px;">
-		<span id="visitCountDisplay"></span>
-	</div>
-	<script>
-		document.getElementById('visitCountDisplay').textContent = localStorage.getItem('visitCount');
-	</script>
+    <!-- Projects Section -->
+    <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Explore my latest work and data engineering solutions</p>
+
+        <div class="projects-grid">
+            <!-- Project 1: Manufacturing Analytics -->
+            <div class="project-card" onclick="window.open('https://github.com/cvegaz/portfolio/blob/main/power_bi/README.md', '_blank')">
+                <div class="project-tag">Power BI</div>
+                <img src="assets/images/imgBI.png" alt="Manufacturing Analytics Dashboard" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Process Optimization & Mechanical Analysis</h3>
+                    <div class="impact-badges">
+                        <span class="impact-badge">Reduced Lost Hours</span>
+                        <span class="impact-badge">Fewer Defects</span>
+                    </div>
+                    <p class="project-description">Analyzed operational performance data from two machines using CSV data. Identified mechanical issues and downtime patterns to drive corrective efforts and process optimization through data-driven insights.</p>
+                    <a href="#" class="project-link">View Project</a>
+                </div>
+            </div>
+
+            <!-- Project 2: Python Data Entry -->
+            <div class="project-card" onclick="window.open('https://github.com/cvegaz/portfolio/blob/main/python_data_entry/README.md', '_blank')">
+                <div class="project-tag">Python</div>
+                <img src="assets/images/imgPy.png" alt="Python Web Automation" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Web Automation & Data Entry</h3>
+                    <div class="impact-badges">
+                        <span class="impact-badge">Increased Efficiency</span>
+                        <span class="impact-badge">Zero Manual Entry</span>
+                    </div>
+                    <p class="project-description">Automated form-filling processes involving image files and Excel data. Eliminated repetitive manual data entry tasks across multiple web form fields, significantly increasing operational efficiency.</p>
+                    <a href="#" class="project-link">View Project</a>
+                </div>
+            </div>
+
+            <!-- Project 3: Database Solutions -->
+            <div class="project-card" onclick="window.open('https://github.com/cvegaz/portfolio/blob/main/sql_db/README.md', '_blank')">
+                <div class="project-tag">MySQL</div>
+                <img src="assets/images/imgSQL.png" alt="Sports Team Database" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Sports Team Database</h3>
+                    <div class="impact-badges">
+                        <span class="impact-badge">Strategic Insights</span>
+                        <span class="impact-badge">Data-Driven Decisions</span>
+                    </div>
+                    <p class="project-description">Database design and maintenance for sports team operations. Extraction of operational insights enabling strategic decision-making and enhanced operational strategies through improved data accessibility.</p>
+                    <a href="#" class="project-link">View Project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="skills-section">
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">Technologies and tools I work with</p>
+
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon">🐍</div>
+                    <div class="skill-name">Python</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🗄️</div>
+                    <div class="skill-name">MySQL</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">📊</div>
+                    <div class="skill-name">Power BI</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">📑</div>
+                    <div class="skill-name">Excel</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🤖</div>
+                    <div class="skill-name">Web Automation</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">⚙️</div>
+                    <div class="skill-name">ETL</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">📈</div>
+                    <div class="skill-name">Data Analytics</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🔍</div>
+                    <div class="skill-name">Process Optimization</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2>Let's Connect</h2>
+        <p>Interested in collaboration? Feel free to reach out!</p>
+        <p style="margin-top: 10px; opacity: 0.8;">🚀 View full portfolio repository: <a href="https://github.com/cvegaz/portfolio" target="_blank" style="color: #60a5fa; text-decoration: none; font-weight: 600;">github.com/cvegaz/portfolio</a></p>
+
+        <div class="contact-info">
+            <div class="contact-item">vezc.vega@gmail.com</div>
+            <div class="contact-item location">CDMX, México</div>
+        </div>
+
+        <div class="social-links">
+            <a href="https://github.com/cvegaz" target="_blank" class="social-link" title="GitHub">
+                <span>💻</span>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="social-link" title="LinkedIn">
+                <span>💼</span>
+            </a>
+            <a href="mailto:vezc.vega@gmail.com" class="social-link" title="Email">
+                <span>📧</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Visit Counter -->
+    <div class="visit-counter">
+        👁️ Visitas: <span id="visitCountDisplay">0</span>
+    </div>
+
+    <script>
+        // Visit Counter
+        if (localStorage.getItem('visitCount')) {
+            let visitCount = parseInt(localStorage.getItem('visitCount'));
+            localStorage.setItem('visitCount', visitCount + 1);
+        } else {
+            localStorage.setItem('visitCount', 1);
+        }
+        document.getElementById('visitCountDisplay').textContent = localStorage.getItem('visitCount');
+
+        // Scroll Animation for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .skill-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
